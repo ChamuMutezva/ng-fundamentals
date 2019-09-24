@@ -5,7 +5,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: "event-thumbnail",
   template: `
-    <div class="container">
+    <div [routerLink]="['/events', event.id]" class="container">
       <div class="myEvents">
         <h2>{{ event.name }}</h2>
         <div>Date: {{ event.date }}</div>
