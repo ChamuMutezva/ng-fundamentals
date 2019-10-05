@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { EventService } from "./shared/event.service";
 import { ToastrService } from "../common/toastr.service";
-declare let toastr;
+import { ActivatedRoute } from '@angular/router';
+import { IEvent } from './shared/index';
+
 
 @Component({
   template: `
@@ -21,17 +23,18 @@ declare let toastr;
   styles: [``]
 })
 export class EventsListComponent implements OnInit {
-  events: any[];
+  events: IEvent[];
   // tslint:disable-next-line:no-shadowed-variable
   constructor(
     private eventService: EventService,
     // tslint:disable-next-line:no-shadowed-variable
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private route: ActivatedRoute
   ) {}
 
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnInit() {
-    this.events = this.eventService.getEvents();
+   this.events = this.route.snapshot.data['events']
   }
 
   handleThumbnailClick(eventName) {
